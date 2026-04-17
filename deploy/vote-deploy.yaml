@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: "2026-04-17T11:49:01Z"
+  generation: 1
+  labels:
+    app: vote
+  name: vote
+  namespace: instavote
+  resourceVersion: "1776426541392031014"
+  uid: 9e02b3c1-01e9-4ca0-aff9-e5c89d534514
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 4
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: vote
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: vote
+    spec:
+      containers:
+      - image: mohaalhanbali/vote:v1
+        imagePullPolicy: IfNotPresent
+        name: vote
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status: {}
