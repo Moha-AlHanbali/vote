@@ -27,7 +27,7 @@ spec:
         app: vote
     spec:
       containers:
-      - image: mohaalhanbali/vote:v1
+      - image: mohaalhanbali/vote:latest
         imagePullPolicy: IfNotPresent
         name: vote
         ports:
